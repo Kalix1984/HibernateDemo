@@ -15,19 +15,28 @@ public class Main {
 	public static EntityManagerFactory sessionFactory = null;
 
 	public static void main(String[] args) throws Exception {
+		printOutEnviromentVariables();
 		setUp();
 		save();
 		getAll();
+	}
 
+	private static void printOutEnviromentVariables() {
+		System.out.println("URL: " + EnviromentVariables.EMK_DB_URL.getValue());
+		System.out.println("UserName: " + EnviromentVariables.EMK_DB_USER.getValue());
+		System.out.println("Password: " + EnviromentVariables.EMK_DB_PASSWORD.getValue());
 	}
 
 	protected static void setUp() throws Exception {
 		final Map<String, String> params = new HashMap<>();
-		params.put("hibernate.connection.driver_class", "org.postgresql.Driver");
-		params.put("hibernate.connection.url", "jdbc:postgresql://domain:port/database");
-		params.put("hibernate.connection.username", "(user)");
-		params.put("hibernate.connection.password", "(password)");
-		params.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+		params.put("hibernate.connection.driver_class", "org.h2.Driver");
+		//jdbc:h2:~/mydb
+		params.put("hibernate.connection.url", EnviromentVariables.EMK_DB_URL.getValue());
+		//username
+		params.put("hibernate.connection.username", EnviromentVariables.EMK_DB_USER.getValue());
+		//password
+		params.put("hibernate.connection.password", EnviromentVariables.EMK_DB_PASSWORD.getValue());
+		params.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 	
 		sessionFactory = Persistence.createEntityManagerFactory("jpa", params);
 	}

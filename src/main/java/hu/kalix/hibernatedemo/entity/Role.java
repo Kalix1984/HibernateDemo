@@ -24,7 +24,6 @@ public class Role {
 	public Role() {}
 
 	public Role(String roleName) {
-		super();
 		this.roleName = roleName;
 	}
 	
