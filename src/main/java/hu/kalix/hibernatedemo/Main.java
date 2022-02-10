@@ -94,10 +94,21 @@ public class Main {
 		EntityManager entityManager = sessionFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 		
-		List<User> result = entityManager.createQuery("from User", User.class).getResultList();
-		for (User role : result) {
+		List<User> result1 = entityManager.createQuery("from User", User.class).getResultList();
+		for (User user : result1) {
+			System.out.println(user);
+		}
+
+		List<Role> result2 = entityManager.createQuery("from Role", Role.class).getResultList();
+		for (Role role : result2) {
 			System.out.println(role);
 		}
+
+		List<Authority> result = entityManager.createQuery("from Authority", Authority.class).getResultList();
+		for (Authority authority : result) {
+			System.out.println(authority);
+		}
+
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}
